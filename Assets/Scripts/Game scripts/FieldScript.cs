@@ -11,19 +11,23 @@ public class FieldScript : MonoBehaviour
         defaultColor = GetComponent<Renderer>().material.color;
     }
 
+    // check if this component is green, if so move selected figure on this field
     public void OnMouseDown()
     {
         if (GetComponent<Renderer>().material.color == Color.green)
         {
             foreach (GameObject figure in GameObject.FindGameObjectsWithTag("PlayerFigure"))
             {
-                if (figure.GetComponent<MoveFigure>().selected)
+                if (figure.GetComponent<PlayerFigureScript>().selected)
                 {
                     Debug.Log("find figure");
-                    figure.GetComponent<MoveFigure>().UnGreen();
-                    // tbd fix this currently moving but to wrong place
-                    Vector3 v = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-                    figure.transform.Translate(v);
+                    figure.GetComponent<PlayerFigureScript>().UnGreen();
+                    figure.transform.position = transform.position + new Vector3(0, 1, 0);
+                    // change color of places where figure can move
+                    foreach (GameObject place in GameObject.FindGameObjectsWithTag("FirstMove"))
+                    {
+                        place.GetComponent<FieldScript>().UnGreen();
+                    }
                 }
             }
         }

@@ -26,7 +26,7 @@ public class CancelSelect : MonoBehaviour
         // change color of figures
         foreach (GameObject figure in playerFigures)
         {
-            figure.GetComponent<MoveFigure>().UnGreen();
+            figure.GetComponent<PlayerFigureScript>().UnGreen();
         }
 
     }

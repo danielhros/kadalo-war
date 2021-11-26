@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FirstMove
   - PlayerFigure
+  - StartButton
+  - EnemyFigure
   layers:
   - Default
   - TransparentFX

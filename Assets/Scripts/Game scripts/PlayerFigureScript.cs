@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveFigure : MonoBehaviour
+public class PlayerFigureScript : MonoBehaviour
 {
     public GameObject[] firstMoves;
     public bool selected;
