@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
         figuresOrder = GameObject.FindGameObjectsWithTag("EnemyFigure").Concat(GameObject.FindGameObjectsWithTag("PlayerFigure")).ToArray();
         GameObject.FindGameObjectsWithTag("StartButton")[0].GetComponentInChildren<Text>().text = "Pause Game";
 
-
+        SortArray();
         StartCoroutine(Steps());
 
         // zacnem prechadzat polom figures order
@@ -48,7 +48,20 @@ public class GameController : MonoBehaviour
             {
                 figure.GetComponent<PawnScript>().Move();
                 yield return new WaitForSeconds(1);
+
             }
         }
+    }
+
+    private void SortArray()
+    {
+
+        SortedDictionary<string, GameObject> sortedTiles = new SortedDictionary<string, GameObject>();
+        for (int i = 0; i < figuresOrder.Length; i++)
+        {
+            sortedTiles.Add(figuresOrder[i].GetComponent<OrderScript>().OrderNum, figuresOrder[i]);
+        }
+
+        figuresOrder = sortedTiles.Values.ToArray();
     }
 }

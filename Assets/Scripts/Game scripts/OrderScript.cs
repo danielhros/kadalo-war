@@ -7,6 +7,7 @@ public class OrderScript : MonoBehaviour
 {
     public TextMeshPro Text;
     public string OrderNum;
+    public int NextOrderNum = 1;
 
     public void Start()
     {
@@ -15,8 +16,13 @@ public class OrderScript : MonoBehaviour
 
     public void SelectedForBattle()
     {
-        OrderNum = "1";
+        OrderNum = NextOrderNum.ToString();
         Text.SetText(OrderNum);
+
+        foreach (GameObject figure in GameObject.FindGameObjectsWithTag("PlayerFigure"))
+        {
+            figure.GetComponent<OrderScript>().NextOrderNum += 2;
+        }
     }
 
 }
