@@ -21,6 +21,7 @@ public class FieldScript : MonoBehaviour
                 if (figure.GetComponent<PlayerFigureScript>().selected)
                 {
                     Debug.Log("find figure");
+                    figure.GetComponent<OrderScript>().SelectedForBattle();
                     figure.GetComponent<PlayerFigureScript>().UnGreen();
                     figure.transform.position = transform.position + new Vector3(0, 1, 0);
                     // change color of places where figure can move

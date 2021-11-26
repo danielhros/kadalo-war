@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -12,14 +13,10 @@ public class GameController : MonoBehaviour
         Debug.Log("game was started");
 
         figuresOrder = GameObject.FindGameObjectsWithTag("EnemyFigure").Concat(GameObject.FindGameObjectsWithTag("PlayerFigure")).ToArray();
+        GameObject.FindGameObjectsWithTag("StartButton")[0].GetComponentInChildren<Text>().text = "Pause Game";
 
 
-        foreach (GameObject figure in figuresOrder)
-        {
-            figure.GetComponent<PawnScript>().Move();
-        }
-
-        //GameObject.FindGameObjectsWithTag("StartButton"). ; // tbd change text to pause game
+        StartCoroutine(Steps());
 
         // zacnem prechadzat polom figures order
         // v poli figures order su figurky v poradi v akom pojdu
@@ -40,9 +37,18 @@ public class GameController : MonoBehaviour
 
         // velkost policka je 1,95x1,95 cize ak sa figurka pohne viem lahko vypocitat pomocou suradnic
         // nasledne spravim ray dole a prve co tam bude musi byt policko
+    }
 
 
-
-
+    private IEnumerator Steps()
+    {
+        while (true)
+        {
+            foreach (GameObject figure in figuresOrder)
+            {
+                figure.GetComponent<PawnScript>().Move();
+                yield return new WaitForSeconds(1);
+            }
+        }
     }
 }
