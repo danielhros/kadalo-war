@@ -46,4 +46,7 @@ public class PlayerFigureScript : MonoBehaviour
             child.GetComponent<Renderer>().material.color = Color.white;
         }
     }
+
+
+    // tbd ohandlovat ked si presuva uz po sachovnici figurky aby sa odassignlo policko
 }

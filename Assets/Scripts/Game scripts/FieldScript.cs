@@ -5,6 +5,7 @@ using UnityEngine;
 public class FieldScript : MonoBehaviour
 {
     private Color defaultColor;
+    private GameObject assignedFifure;
 
     public void Start()
     {
@@ -20,7 +21,7 @@ public class FieldScript : MonoBehaviour
             {
                 if (figure.GetComponent<PlayerFigureScript>().selected)
                 {
-                    Debug.Log("find figure");
+                    AsignFigure(figure);
                     figure.GetComponent<OrderScript>().SelectedForBattle();
                     figure.GetComponent<PlayerFigureScript>().UnGreen();
                     figure.transform.position = transform.position + new Vector3(0, 1, 0);
@@ -32,6 +33,21 @@ public class FieldScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void AsignFigure(GameObject figure)
+    {
+        if (assignedFifure)
+        {
+            Debug.Log("vyhadzovanie!!!!");
+            GameObject.FindGameObjectsWithTag("Battlefield")[0].GetComponent<GameController>().RemoveFromArray(assignedFifure);
+        }
+        assignedFifure = figure;
+    }
+
+    public void UnAsignFigure()
+    {
+        assignedFifure = null;
     }
 
     public void Green()
