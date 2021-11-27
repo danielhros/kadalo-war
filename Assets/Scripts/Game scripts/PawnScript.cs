@@ -21,6 +21,8 @@ public class PawnScript : MonoBehaviour
             hit.transform.gameObject.GetComponent<FieldScript>().UnAsignFigure();
         }
 
+        // order script
+
         GetComponent<Rigidbody>().isKinematic = true;
         transform.position = transform.position + (transform.forward) * 2;
         MovesDone++;
@@ -35,7 +37,21 @@ public class PawnScript : MonoBehaviour
             else
             {
                 // stop moving this figure, it is out of the board
+                MovesDone = NumberOfMoves;
             }
         }
     }
+
+    //void OnMouseEnter()
+    //{
+
+    //    //If your mouse hovers over the GameObject with the script attached, output this message
+    //    Debug.Log("Mouse is over GameObject.");
+    //}
+
+    //void OnMouseExit()
+    //{
+    //    //The mouse is no longer hovering over the GameObject so output this message each frame
+    //    Debug.Log("Mouse is no longer on GameObject.");
+    //}
 }

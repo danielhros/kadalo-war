@@ -16,6 +16,7 @@ public class OrderScript : MonoBehaviour
 
     public void SelectedForBattle()
     {
+        // TBD if already was selected for battle change numbers
         OrderNum = NextOrderNum.ToString();
         Text.SetText(OrderNum);
 

@@ -14,13 +14,16 @@ public class PlayerFigureScript : MonoBehaviour
 
     public void OnMouseDown()
     {
-        // change color of places where figure can move
-        foreach (GameObject place in firstMoves)
+        if (transform.gameObject.GetComponent<OrderScript>().OrderNum == "")
         {
-            place.GetComponent<FieldScript>().Green();
-        }
+            // change color of places where figure can move
+            foreach (GameObject place in firstMoves)
+            {
+                place.GetComponent<FieldScript>().Green();
+            }
 
-        Green();
+            Green();
+        }
     }
 
 

@@ -35,7 +35,30 @@ public class GameController : MonoBehaviour
 
             }
         }
+        EndGame();
+    }
+
+    private void EndGame()
+    {
         Debug.Log("all figures are done moving ==== GAME END");
+
+        var playerFiguresLeft = GameObject.FindGameObjectsWithTag("PlayerFigure");
+        var enemyFiguresLeft = GameObject.FindGameObjectsWithTag("EnemyFigure");
+        var playerPoints = 0;
+        var enemyPoints = 0;
+        foreach (GameObject figure in playerFiguresLeft)
+        {
+            playerPoints += figure.GetComponent<PointsScript>().points;
+        }
+
+        foreach (GameObject figure in enemyFiguresLeft)
+        {
+            enemyPoints += figure.GetComponent<PointsScript>().points;
+        }
+
+        Debug.Log("GAME STATS");
+        Debug.Log("Player points: " + playerPoints);
+        Debug.Log("Enemy points: " + enemyPoints);
     }
 
     private void SortArray()
@@ -66,5 +89,10 @@ public class GameController : MonoBehaviour
         }
         Array.Resize(ref figuresOrder, figuresOrder.Length - 1);
 
+    }
+
+    public void ResetGame()
+    {
+        Debug.Log("reset game");
     }
 }
