@@ -41,6 +41,7 @@ public class FieldScript : MonoBehaviour
         {
             Debug.Log("vyhadzovanie!!!!");
             GameObject.FindGameObjectsWithTag("Battlefield")[0].GetComponent<GameController>().RemoveFromArray(assignedFifure);
+            Destroy(assignedFifure);
         }
         assignedFifure = figure;
     }

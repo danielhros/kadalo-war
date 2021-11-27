@@ -23,15 +23,19 @@ public class GameController : MonoBehaviour
 
     private IEnumerator Steps()
     {
-        while (true)
+        while (figuresOrder.Length > 0)
         {
             foreach (GameObject figure in figuresOrder)
             {
-                figure.GetComponent<PawnScript>().Move();
-                yield return new WaitForSeconds(1);
+                if (figure)
+                {
+                    figure.GetComponent<PawnScript>().Move();
+                    yield return new WaitForSeconds(1);
+                }
 
             }
         }
+        Debug.Log("all figures are done moving ==== GAME END");
     }
 
     private void SortArray()
@@ -53,6 +57,8 @@ public class GameController : MonoBehaviour
         {
             if (figuresOrder[i] == figure) index = i;
         }
+        if (index == -1)
+            return;
 
         for (int a = index; a < figuresOrder.Length - 1; a++)
         {
