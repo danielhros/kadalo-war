@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
+    [SerializeField] private int fieldsWidth;
+    [SerializeField] private int fieldsHeight;
+    [SerializeField] private GameObject fields;
+
 
     public void Awake() {
         Instance = this;
