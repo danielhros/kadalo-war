@@ -21,8 +21,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
+    private void Start() {
         UpdateGameState(GameState.MainMenu);
     }
 
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 break;
             case GameState.FiguresArrange:
-                HandleFiguresArrange();
                 break;
             case GameState.Fight:
                 break;
@@ -51,13 +49,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void HandleFiguresArrange() {
-
-    }
-
 }
-
-
 
 public enum GameState {
     MainMenu,
