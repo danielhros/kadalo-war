@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
         //GameObject.FindGameObjectsWithTag("StartButton")[0].GetComponentInChildren<Text>().text = "Pause Game";
 
         SortArray();
+
+        GameManager.Instance.UpdateGameState(GameState.Fight);
+
         StartCoroutine(Steps());
     }
 
