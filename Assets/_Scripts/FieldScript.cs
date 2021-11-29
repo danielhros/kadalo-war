@@ -24,7 +24,7 @@ public class FieldScript : MonoBehaviour
                     AsignFigure(figure);
                     figure.GetComponent<OrderScript>().SelectedForBattle();
                     figure.GetComponent<PlayerFigureScript>().UnGreen();
-                    figure.transform.position = transform.position + new Vector3(0, 1, 0);
+                    figure.transform.position = transform.position + new Vector3(0, transform.position.y, 0);
                     // change color of places where figure can move
                     foreach (GameObject place in GameObject.FindGameObjectsWithTag("FirstMove"))
                     {
