@@ -7,8 +7,7 @@ public class Rotator : MonoBehaviour
     [SerializeField] private Vector3 _roatation;
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         transform.Rotate(_roatation * Time.deltaTime);
     }
 }
