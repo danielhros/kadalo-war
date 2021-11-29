@@ -6,6 +6,7 @@ public class MenuManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject _menuCanvas;
+    [SerializeField] private GameObject _figuresArrangeCanvas;
 
 
     private void Awake() {
@@ -19,6 +20,8 @@ public class MenuManager : MonoBehaviour
 
     private void GameManagerOnOnGameStateChanged(GameState state) {
         _menuCanvas.SetActive(state == GameState.MainMenu);
+        _figuresArrangeCanvas.SetActive(state == GameState.FiguresArrange);
+
     }
 
     public void StartLevel1() {

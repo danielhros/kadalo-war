@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
         Debug.Log("game was started");
 
         figuresOrder = GameObject.FindGameObjectsWithTag("EnemyFigure").Concat(GameObject.FindGameObjectsWithTag("PlayerFigure")).ToArray();
-        GameObject.FindGameObjectsWithTag("StartButton")[0].GetComponentInChildren<Text>().text = "Pause Game";
+        //GameObject.FindGameObjectsWithTag("StartButton")[0].GetComponentInChildren<Text>().text = "Pause Game";
 
         SortArray();
         StartCoroutine(Steps());
