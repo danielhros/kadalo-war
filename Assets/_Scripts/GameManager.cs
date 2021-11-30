@@ -22,15 +22,13 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-        UpdateGameState(GameState.MainMenu);
+        UpdateGameState(GameState.FiguresArrange);
     }
 
     public void UpdateGameState(GameState newState) {
         State = newState;
 
         switch (newState) {
-            case GameState.MainMenu:
-                break;
             case GameState.FiguresArrange:
                 break;
             case GameState.Fight:
@@ -38,8 +36,6 @@ public class GameManager : MonoBehaviour
             case GameState.Victory:
                 break;
             case GameState.Loose:
-                break;
-            case GameState.PauseMenu:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -52,8 +48,6 @@ public class GameManager : MonoBehaviour
 }
 
 public enum GameState {
-    MainMenu,
-    PauseMenu,
     FiguresArrange,
     Fight,
     Victory,
