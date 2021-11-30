@@ -8,8 +8,6 @@ public class LevelManager : MonoBehaviour {
 
     public static LevelManager Instance;
 
-    [SerializeField] private GameObject _loaderCanvas;
-
     // Start is called before the first frame update
     void Awake() {
         if (Instance == null) {
@@ -20,21 +18,16 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public async void LoadScene(string sceneName) {
+    public void LoadScene(string sceneName) {
 
-        var scene = SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadSceneAsync(sceneName);
 
+        // TODO: add loading screen
         //scene.allowSceneActivation = false;
-
         //_loaderCanvas.SetActive(true);
-
-
         //do {
-        //    await Task.Delay(100);
         //} while (scene.progress < 0.9f);
-
         //scene.allowSceneActivation = true;
-
         //_loaderCanvas.SetActive(false);
     }
 }
