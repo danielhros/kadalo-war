@@ -13,9 +13,17 @@ public class MusicManager : MonoBehaviour
 
     public static MusicManager Instance;
 
-    public void Awake()
+    void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
