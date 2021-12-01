@@ -62,6 +62,12 @@ public class GameController : MonoBehaviour
         Debug.Log("GAME STATS");
         Debug.Log("Player points: " + playerPoints);
         Debug.Log("Enemy points: " + enemyPoints);
+
+        if (enemyPoints >= playerPoints) {
+            GameManager.Instance.UpdateGameState(GameState.Loose);
+        } else {
+            GameManager.Instance.UpdateGameState(GameState.Victory);
+        }
     }
 
     private void SortArray()

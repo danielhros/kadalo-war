@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _arrangeFiguresCanvas;
     [SerializeField] private GameObject _fightCanvas;
     [SerializeField] private GameObject _sureExitCanvas;
+    [SerializeField] private GameObject _victoryCanvas;
+    [SerializeField] private GameObject _looseCanvas;
 
     private bool _sureExitActivate = false;
 
@@ -20,12 +22,22 @@ public class MenuManager : MonoBehaviour
     }
 
     private void GameManagerOnOnGameStateChanged(GameState state) {
-        _arrangeFiguresCanvas.SetActive(state == GameState.FiguresArrange);
-        _fightCanvas.SetActive(state == GameState.Fight);
+
+        bool isVictoryState = state == GameState.Victory;
+        bool isLooseState = state == GameState.Loose;
+
+        if (isVictoryState || isLooseState) {
+            _looseCanvas.SetActive(isLooseState);
+            _victoryCanvas.SetActive(isVictoryState);
+        } else {
+            _arrangeFiguresCanvas.SetActive(state == GameState.FiguresArrange);
+            _fightCanvas.SetActive(state == GameState.Fight);
+        }
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        GameState actualGameState = GameManager.Instance.State;
+        if (Input.GetKeyDown(KeyCode.Escape) && (actualGameState == GameState.FiguresArrange || actualGameState == GameState.Fight)) {
             ToogleExitCanvas();
         }
     }
