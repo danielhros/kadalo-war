@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("game was started");
+        Debug.Log("Game started");
 
         figuresOrder = GameObject.FindGameObjectsWithTag("EnemyFigure").Concat(GameObject.FindGameObjectsWithTag("PlayerFigure")).ToArray();
         //GameObject.FindGameObjectsWithTag("StartButton")[0].GetComponentInChildren<Text>().text = "Pause Game";

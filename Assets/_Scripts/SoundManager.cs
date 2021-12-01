@@ -7,15 +7,24 @@ public class SoundManager : MonoBehaviour {
 
     public static SoundManager Instance;
 
-    //[SerializeField] private AudioClip[] clips;
-
+    [SerializeField] private AudioClip[] backgroundMusicClips;
     [SerializeField] private AudioSource _effectsSource;
     [SerializeField] private AudioSource _musicSource;
+
+    public AudioSource EffectSource {
+        get { return _effectsSource; }
+    }
+
+    public AudioSource MusicSource {
+        get { return _musicSource; }
+    }
+
 
     void Awake()
     {
         if (Instance == null)
         {
+            // set volume according that
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -26,7 +35,6 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void PlaySound(AudioClip clip) {
-        Debug.Log("I am here");
         _effectsSource.PlayOneShot(clip);
     }
 
@@ -38,31 +46,21 @@ public class SoundManager : MonoBehaviour {
         _musicSource.volume = value;
     }
 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    backgroundMusicAudioSource.loop = false;
-    //}
+    // Start is called before the first frame update
+    void Start() {
+        _musicSource.loop = false;
+    }
 
     //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (!backgroundMusicAudioSource.isPlaying)
-    //    {
-    //        backgroundMusicAudioSource.clip = GetRandomClip();
-    //        backgroundMusicAudioSource.Play();
-    //    }
-    //}
+    void Update() {
+        if (!_musicSource.isPlaying)
+        {
+            _musicSource.clip = GetRandomClip();
+            _musicSource.Play();
+        }
+    }
 
-    //private AudioClip GetRandomClip()
-    //{
-    //    return clips[Random.Range(0, clips.Length)];
-    //}
-
-    //public void SetVolume(string mixerName, float sliderValue)
-    //{
-    //    mixer.SetFloat(mixerName, Mathf.Log10(sliderValue) * 20);
-    //}
-
-
+    private AudioClip GetRandomClip() {
+        return backgroundMusicClips[Random.Range(0, backgroundMusicClips.Length)];
+    }
 }

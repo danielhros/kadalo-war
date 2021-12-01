@@ -9,6 +9,8 @@ TagManager:
   - StartButton
   - EnemyFigure
   - Battlefield
+  - MusicSlider
+  - EffectSlider
   layers:
   - Default
   - TransparentFX

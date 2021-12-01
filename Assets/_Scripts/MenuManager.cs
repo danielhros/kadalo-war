@@ -20,8 +20,4 @@ public class MenuManager : MonoBehaviour
         _arrangeFiguresCanvas.SetActive(state == GameState.FiguresArrange);
         _fightCanvas.SetActive(state == GameState.Fight);
     }
-
-    public void QuitGame() {
-        Application.Quit();
-    }
 }

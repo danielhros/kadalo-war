@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 3887924421219637487}
   - component: {fileID: 3887924421219637486}
   - component: {fileID: 3887924421219637481}
-  - component: {fileID: 8750928147556597780}
+  - component: {fileID: 6342838520284814797}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -280,7 +280,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8750928147556597780}
+      - m_Target: {fileID: 6342838520284814797}
         m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
         m_MethodName: PlaySoundOnce
         m_Mode: 1
@@ -292,7 +292,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8750928147556597780
+--- !u!114 &6342838520284814797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
