@@ -39,7 +39,7 @@ public class FieldScript : MonoBehaviour
     {
         if (assignedFifure)
         {
-            Debug.Log("vyhadzovanie!!!!");
+            Debug.Log("expulsion");
             GameObject.FindGameObjectsWithTag("Battlefield")[0].GetComponent<GameController>().RemoveFromArray(assignedFifure);
             Destroy(assignedFifure);
         }

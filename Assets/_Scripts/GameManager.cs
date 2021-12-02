@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,11 +13,22 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
+    [SerializeField] private int fieldsWidth;
+    [SerializeField] private Field[] fields;
+    [SerializeField] private GameObject[] playerFigures;
+    [SerializeField] private GameObject[] _enemyFigures;
+
     public void Awake() {
+        //Debug.Log(getField(0, 0));
         Instance = this;
     }
 
+    private Field getField(int x, int y) {
+        return fields[x * fieldsWidth + y];
+    }
+
     private void Start() {
+        SpawnEnemyFigures();
         UpdateGameState(GameState.FiguresArrange);
     }
 
@@ -38,6 +50,17 @@ public class GameManager : MonoBehaviour
 
         OnGameStateChanged?.Invoke(newState);
 
+    }
+
+    private void SpawnEnemyFigures() {
+        foreach(GameObject enemyFigure in _enemyFigures) {
+            int SpawnPositionX = enemyFigure.GetComponent<EnemyFigureSpawnPosition>().SpawnPositionX;
+            int SpawnPositionY = enemyFigure.GetComponent<EnemyFigureSpawnPosition>().SpawnPositionY;
+
+            Field FieldToSpawnOn = getField(SpawnPositionX, SpawnPositionY);
+            enemyFigure.transform.position = FieldToSpawnOn.transform.position + new Vector3(0, 0.2f, 0);
+            enemyFigure.SetActive(true);
+        }
     }
 
 }
