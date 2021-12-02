@@ -171,11 +171,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4499817239284372}
-  - component: {fileID: 2695308158350029817}
-  - component: {fileID: 960993355809653656}
-  - component: {fileID: 2350045311900499851}
   - component: {fileID: 1587147644451989521}
   - component: {fileID: 5105422299746197590}
+  - component: {fileID: 7067029799254525243}
+  - component: {fileID: 1468221347893343092}
   m_Layer: 0
   m_Name: Black Stone Pawn
   m_TagString: EnemyFigure
@@ -205,47 +204,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2695308158350029817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335334207052556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 862c3b67ec15246e989eb6ed309f1e33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NumberOfMoves: 0
---- !u!114 &960993355809653656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335334207052556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c95e8073e614e408905478c1b4ee77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: {fileID: 3321223471969888855}
-  OrderNum: 0
-  NextOrderNum: 1
---- !u!114 &2350045311900499851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335334207052556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af28fde693fb949faa5ec4ae0fbfda49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  points: 1
 --- !u!65 &1587147644451989521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -275,6 +233,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7067029799254525243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335334207052556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628b2ef82ae124f0ea98a223dff307d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPositionX: 0
+  SpawnPositionY: 0
+--- !u!114 &1468221347893343092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335334207052556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc6e4aec18f24ef3ba0d6c60c40a494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: {fileID: 3321223471969888855}
 --- !u!1 &1572437516991594
 GameObject:
   m_ObjectHideFlags: 0

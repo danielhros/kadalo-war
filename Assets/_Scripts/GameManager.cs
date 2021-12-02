@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] playerFigures;
     [SerializeField] private GameObject[] _enemyFigures;
 
+    [SerializeField] private bool playerGoFirst;
+
     public void Awake() {
         //Debug.Log(getField(0, 0));
         Instance = this;
@@ -53,12 +55,19 @@ public class GameManager : MonoBehaviour
     }
 
     private void SpawnEnemyFigures() {
+
+        int moveNumber = playerGoFirst ? 2 : 1;
+
         foreach(GameObject enemyFigure in _enemyFigures) {
             int SpawnPositionX = enemyFigure.GetComponent<EnemyFigureSpawnPosition>().SpawnPositionX;
             int SpawnPositionY = enemyFigure.GetComponent<EnemyFigureSpawnPosition>().SpawnPositionY;
 
             Field FieldToSpawnOn = getField(SpawnPositionX, SpawnPositionY);
             enemyFigure.transform.position = FieldToSpawnOn.transform.position + new Vector3(0, 0.2f, 0);
+
+            enemyFigure.GetComponent<MoveNumber>().SetMoveNumber(moveNumber);
+            moveNumber += 2;
+
             enemyFigure.SetActive(true);
         }
     }
