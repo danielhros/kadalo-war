@@ -6619,18 +6619,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8182983077875782903, guid: e498a636a12f44eaf854a6402ce9c568, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8182983077875782903, guid: e498a636a12f44eaf854a6402ce9c568, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 8182983077875782903, guid: e498a636a12f44eaf854a6402ce9c568, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8182983077875782903, guid: e498a636a12f44eaf854a6402ce9c568, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -8703,7 +8691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a1627a663c648fab4dafa34cd807eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveFor: {x: 0, y: 0, z: -4}
+  _moveFor: {x: 0, y: 0, z: -3}
   t: 0.01
 --- !u!81 &1753406028
 AudioListener:

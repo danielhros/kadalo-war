@@ -53,8 +53,7 @@ public class SoundManager : MonoBehaviour {
 
     //// Update is called once per frame
     void Update() {
-        if (!_musicSource.isPlaying)
-        {
+        if (!_musicSource.isPlaying) {
             _musicSource.clip = GetRandomClip();
             _musicSource.Play();
         }

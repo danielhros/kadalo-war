@@ -8,7 +8,7 @@ public class MoveFor : MonoBehaviour
     [SerializeField] private Vector3 _moveFor;
     [SerializeField] private float t;
 
-    private bool canMove;
+    private bool canMove = false;
     private Vector3 finalPosition;
 
     private void Start() {
@@ -31,20 +31,14 @@ public class MoveFor : MonoBehaviour
     }
     // Update is called once per frame
     void Update() {
-        if (canMove ) {
+        if (canMove) {
             MoveGameObject();
         };
     }
 
     void MoveGameObject() {
-        Vector3 actualPosition = transform.position;
-        if (actualPosition == finalPosition) {
-            // delete object
-            Debug.Log("Destroy");
-        } else {
-
-            transform.position = Vector3.Lerp(actualPosition, finalPosition, t);
-        }
+        Vector3 actualPosition = transform.position;        
+        transform.position = Vector3.Lerp(actualPosition, finalPosition, t);
     }
 
    
