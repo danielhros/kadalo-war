@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 7067029799254525243}
   - component: {fileID: 1468221347893343092}
   - component: {fileID: 14867357523996174}
-  - component: {fileID: 6688885704515184377}
+  - component: {fileID: 2879149160649187965}
   m_Layer: 0
   m_Name: Black Stone Pawn
   m_TagString: EnemyFigure
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 1
---- !u!114 &6688885704515184377
+--- !u!114 &2879149160649187965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,9 +268,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335334207052556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d5d10ee1ad04aef9cbf365b44717e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 202096cec84bf4872aca40cc7aba4b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveX: 0
+  moveY: 1
+  posX: 0
+  posY: 0
+  moves: 3
+  doneMoves: 0
 --- !u!1 &1572437516991594
 GameObject:
   m_ObjectHideFlags: 0

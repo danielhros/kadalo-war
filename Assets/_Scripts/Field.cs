@@ -5,7 +5,7 @@ using UnityEngine;
 public class Field : MonoBehaviour
 {
     private Color defaultColor;
-    public GameObject assignedFifure;
+    public GameObject assignedFifure = null;
 
     public void Start()
     {
@@ -24,6 +24,7 @@ public class Field : MonoBehaviour
 
     public void OnMouseDown()
     {
-        GameManager.Instance.AssignSelectedFigure(transform.gameObject);
+        if (GetComponent<Renderer>().material.color == Color.green)
+            GameManager.Instance.AssignSelectedFigure(this);
     }
 }

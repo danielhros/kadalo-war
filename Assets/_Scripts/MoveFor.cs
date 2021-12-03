@@ -11,35 +11,42 @@ public class MoveFor : MonoBehaviour
     private bool canMove = false;
     private Vector3 finalPosition;
 
-    private void Start() {
+    private void Start()
+    {
         finalPosition = transform.position + _moveFor;
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
     }
 
     private void GameManagerOnOnGameStateChanged(GameState state)
     {
-        if(state == GameState.Fight) {
+        if (state == GameState.Fight)
+        {
             canMove = true;
         }
     }
     // Update is called once per frame
-    void Update() {
-        if (canMove) {
+    void Update()
+    {
+        if (canMove)
+        {
             MoveGameObject();
         };
     }
 
-    void MoveGameObject() {
-        Vector3 actualPosition = transform.position;        
+    void MoveGameObject()
+    {
+        Vector3 actualPosition = transform.position;
         transform.position = Vector3.Lerp(actualPosition, finalPosition, t);
     }
 
-   
+
 }

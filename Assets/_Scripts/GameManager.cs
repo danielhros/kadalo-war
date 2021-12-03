@@ -16,32 +16,43 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int fieldsWidth;
     [SerializeField] private Field[] fields;
-    //private List<GameObject> playerFigures = new List<GameObject>();
     [SerializeField] private GameObject[] playerFigures;
     [SerializeField] private GameObject[] _enemyFigures;
     [SerializeField] private bool playerGoFirst;
     [SerializeField] private TextMeshProUGUI enemyPointsText;
-    [SerializeField] private TextMeshProUGUI playerPointsText; // tbd not working cannot set from here value
+    [SerializeField] private TextMeshProUGUI playerPointsText;
+
+    [SerializeField] private TextMeshProUGUI WinEnemyOverallPointsText;
+    [SerializeField] private TextMeshProUGUI winPlayerOverallPointsText;
+    [SerializeField] private TextMeshProUGUI LooseEnemyOverallPointsTex;
+    [SerializeField] private TextMeshProUGUI LoosePlayerOverallPointsText;
+
 
     private int playerOrderNum;
     private GameObject[] firstMoves;
     private GameObject selectedFigure;
     private GameObject[] figuresOrder;
 
+    private Field newField;
+    private Field curField;
+    private int playerPoints = 0;
+    private int enemyPoints = 0;
+
     public void Awake()
     {
         Instance = this;
     }
 
-    private Field getField(int x, int y)
+    private Field getField(int y, int x)
     {
-        return fields[x * fieldsWidth + y];
+        return fields[(x * fieldsWidth) + y];
     }
 
     private void Start()
     {
         playerOrderNum = playerGoFirst ? 1 : 2;
         firstMoves = GameObject.FindGameObjectsWithTag("FirstMove");
+        UpdatePoints();
         SpawnEnemyFigures();
         UpdateGameState(GameState.FiguresArrange);
     }
@@ -73,7 +84,7 @@ public class GameManager : MonoBehaviour
     {
         figuresOrder = playerFigures.Concat(_enemyFigures).ToArray();
         SortArray();
-        UpdatePoints();  // update ui points
+        UpdatePoints();
         StartCoroutine(Steps());
     }
 
@@ -85,32 +96,96 @@ public class GameManager : MonoBehaviour
             {
                 if (figure)
                 {
-                    figure.GetComponent<Pawn>().Move();
-                    // nejako vymysliet system pohybu aby bol univerzalny
+                    UpdatePoints();
+                    if (figure.GetComponent<MoveFigure>().doneMoves >= figure.GetComponent<MoveFigure>().moves)
+                    {
+                        int numIndex = Array.IndexOf(figuresOrder, figure);
+                        figuresOrder = figuresOrder.Where((val, idx) => idx != numIndex).ToArray();
+                        continue;
+                    }
+                    // check number of moves
+                    int posX = figure.GetComponent<MoveFigure>().posX;
+                    int posY = figure.GetComponent<MoveFigure>().posY;
+
+                    if (posX == -1 || posY == -1)
+                        continue;
+                    curField = getField(posX, posY);
+                    curField.GetComponent<Field>().assignedFifure = null;
+
+                    int moveOnX = figure.GetComponent<MoveFigure>().moveX;
+                    int moveOnY = figure.GetComponent<MoveFigure>().moveY;
+
+                    newField = getField(posX + moveOnX, posY + moveOnY);
+                    if (!newField)
+                    {
+                        figure.GetComponent<MoveFigure>().doneMoves = 1000;
+                        continue;
+                    }
+                    figure.GetComponent<MoveFigure>().posX = posX + moveOnX;
+                    figure.GetComponent<MoveFigure>().posY = posY + moveOnY;
+                    if (newField.GetComponent<Field>())
+                    {
+                        if (newField.GetComponent<Field>().assignedFifure == null)
+                        {
+                            newField.GetComponent<Field>().assignedFifure = figure;
+                            figure.transform.position = newField.transform.position + new Vector3(0, 0.2f, 0);
+
+                        }
+                        else
+                        {
+                            var eliminatedFigure = newField.GetComponent<Field>().assignedFifure;
+                            int numIndex = Array.IndexOf(figuresOrder, eliminatedFigure);
+                            figuresOrder = figuresOrder.Where((val, idx) => idx != numIndex).ToArray();
+                            Destroy(eliminatedFigure);
+                            UpdatePoints();
+                        }
+                    }
+                    figure.transform.position = newField.transform.position + new Vector3(0, 0.2f, 0);
+                    figure.GetComponent<MoveFigure>().doneMoves++;
                     yield return new WaitForSeconds(1);
                 }
 
             }
         }
-        // end game according to point call set victory or loose state
+        UpdatePoints();
+        if (playerPoints > enemyPoints)
+        {
+            UpdateGameState(GameState.Victory);
+            WinEnemyOverallPointsText.SetText(enemyPoints.ToString());
+            winPlayerOverallPointsText.SetText(playerPoints.ToString());
+        }
+        else
+        {
+            UpdateGameState(GameState.Loose);
+            LooseEnemyOverallPointsTex.SetText(enemyPoints.ToString());
+            LoosePlayerOverallPointsText.SetText(playerPoints.ToString());
+        }
     }
 
     private void UpdatePoints()
     {
-        var enemyPoints = 0;
+        playerPoints = 0;
+        enemyPoints = 0;
         foreach (GameObject enemyFigure in _enemyFigures)
         {
-            enemyPoints += enemyFigure.GetComponent<Points>().points;
+            if (enemyFigure)
+            {
+                enemyPoints += enemyFigure.GetComponent<Points>().points;
+            }
         }
         enemyPointsText.SetText(enemyPoints.ToString());
 
-        var playerPoints = 0;
+
         foreach (GameObject playerFigure in playerFigures)
         {
-            playerPoints += playerFigure.GetComponent<Points>().points;
+            if (playerFigure)
+            {
+                playerPoints += playerFigure.GetComponent<Points>().points;
+            }
         }
         playerPointsText.SetText(playerPoints.ToString());
     }
+
 
     private void SpawnEnemyFigures()
     {
@@ -122,6 +197,9 @@ public class GameManager : MonoBehaviour
             int SpawnPositionX = enemyFigure.GetComponent<EnemyFigureSpawnPosition>().SpawnPositionX;
             int SpawnPositionY = enemyFigure.GetComponent<EnemyFigureSpawnPosition>().SpawnPositionY;
 
+            enemyFigure.GetComponent<MoveFigure>().posX = SpawnPositionX;
+            enemyFigure.GetComponent<MoveFigure>().posY = SpawnPositionY;
+
             Field FieldToSpawnOn = getField(SpawnPositionX, SpawnPositionY);
             enemyFigure.transform.position = FieldToSpawnOn.transform.position + new Vector3(0, 0.2f, 0);
 
@@ -132,14 +210,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AssignSelectedFigure(GameObject field)
+    public void AssignSelectedFigure(Field field)
     {
         if (selectedFigure)
         {
             if (!field.GetComponent<Field>().assignedFifure)
             {
-                //playerFigures.Add(selectedFigure);
                 field.GetComponent<Field>().assignedFifure = selectedFigure;
+                int ind = Array.IndexOf(fields, field);
+                int x = ind % fieldsWidth;
+                int y = ind / fieldsWidth;
+
+                selectedFigure.GetComponent<MoveFigure>().posX = x;
+                selectedFigure.GetComponent<MoveFigure>().posY = y;
+
+                curField = getField(x, y);
 
                 selectedFigure.transform.position = field.transform.position + new Vector3(0, 0.2f, 0);
                 selectedFigure.GetComponent<MoveNumber>().SetMoveNumber(playerOrderNum);
@@ -181,7 +266,8 @@ public class GameManager : MonoBehaviour
         SortedDictionary<string, GameObject> sortedTiles = new SortedDictionary<string, GameObject>();
         for (int i = 0; i < figuresOrder.Length; i++)
         {
-            sortedTiles.Add(figuresOrder[i].GetComponent<MoveNumber>().orderNum.ToString(), figuresOrder[i]);
+            if (figuresOrder[i].GetComponent<MoveNumber>().orderNum > 0)
+                sortedTiles.Add(figuresOrder[i].GetComponent<MoveNumber>().orderNum.ToString(), figuresOrder[i]);
         }
 
         figuresOrder = sortedTiles.Values.ToArray();

@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 96185997169186587}
   - component: {fileID: 7794047347553017954}
   - component: {fileID: 2573766031494246478}
-  - component: {fileID: 2204308646922357191}
+  - component: {fileID: 6488262902398341553}
   m_Layer: 0
   m_Name: White Stone Pawn
   m_TagString: PlayerFigure
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 1
---- !u!114 &2204308646922357191
+--- !u!114 &6488262902398341553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,9 +185,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109215888586288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d5d10ee1ad04aef9cbf365b44717e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 202096cec84bf4872aca40cc7aba4b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveX: 0
+  moveY: -1
+  posX: -1
+  posY: -1
+  moves: 3
+  doneMoves: 0
 --- !u!1 &1304837620327310
 GameObject:
   m_ObjectHideFlags: 0
