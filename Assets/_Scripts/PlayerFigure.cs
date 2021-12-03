@@ -2,34 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFigureScript : MonoBehaviour
+public class PlayerFigure : MonoBehaviour
 {
-    public GameObject[] firstMoves;
-    public bool selected;
-
-    public void Start()
-    {
-        firstMoves = GameObject.FindGameObjectsWithTag("FirstMove");
-    }
 
     public void OnMouseDown()
     {
-        if (transform.gameObject.GetComponent<OrderScript>().OrderNum == "")
+        if (transform.gameObject.GetComponent<MoveNumber>().orderNum == 0)
         {
-            // change color of places where figure can move
-            foreach (GameObject place in firstMoves)
-            {
-                place.GetComponent<FieldScript>().Green();
-            }
-
             Green();
+            GameManager.Instance.SelectFirstMoves(transform.gameObject);
         }
     }
 
 
     public void Green()
     {
-        selected = true;
         // change color of current figure
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
@@ -41,7 +28,6 @@ public class PlayerFigureScript : MonoBehaviour
 
     public void UnGreen()
     {
-        selected = false;
         // change color of current figure
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
@@ -49,7 +35,4 @@ public class PlayerFigureScript : MonoBehaviour
             child.GetComponent<Renderer>().material.color = Color.white;
         }
     }
-
-
-    // tbd ohandlovat ked si presuva uz po sachovnici figurky aby sa odassignlo policko
 }

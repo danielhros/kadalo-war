@@ -18,7 +18,7 @@ public class PawnScript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            hit.transform.gameObject.GetComponent<FieldScript>().UnAsignFigure();
+            //hit.transform.gameObject.GetComponent<FieldScript>().UnAsignFigure();
         }
 
         // order script
@@ -29,17 +29,17 @@ public class PawnScript : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
 
         var ray2 = new Ray(transform.position, transform.up * -1.0f);
-        RaycastHit hit2;
-        if (Physics.Raycast(ray2, out hit2))
-        {
-            if (hit2.transform.gameObject.GetComponent<FieldScript>())
-                hit2.transform.gameObject.GetComponent<FieldScript>().AsignFigure(transform.gameObject);
-            else
-            {
-                // stop moving this figure, it is out of the board
-                MovesDone = NumberOfMoves;
-            }
-        }
+        //RaycastHit hit2;
+        //if (Physics.Raycast(ray2, out hit2))
+        //{
+        //    //if (hit2.transform.gameObject.GetComponent<FieldScript>())
+        //    //    hit2.transform.gameObject.GetComponent<FieldScript>().AsignFigure(transform.gameObject);
+        //    else
+        //    {
+        //        // stop moving this figure, it is out of the board
+        //        MovesDone = NumberOfMoves;
+        //    }
+        //}
     }
 
     void OnMouseEnter()

@@ -6,8 +6,11 @@ using UnityEngine;
 public class MoveNumber : MonoBehaviour
 {
     public TextMeshPro Text;
+    public int orderNum;
 
-    public void SetMoveNumber(int moveNumber) {
+    public void SetMoveNumber(int moveNumber)
+    {
         Text.SetText(moveNumber.ToString());
+        orderNum = moveNumber;
     }
 }

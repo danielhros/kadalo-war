@@ -6,15 +6,7 @@ using UnityEngine;
 public class EnemyFigureSpawnPosition : MonoBehaviour
 {
     public int SpawnPositionX;
-    public int SpawnPositionY;  
+    public int SpawnPositionY;
 
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
 }

@@ -51,21 +51,24 @@ public class GameController : MonoBehaviour
         var enemyPoints = 0;
         foreach (GameObject figure in playerFiguresLeft)
         {
-            playerPoints += figure.GetComponent<PointsScript>().points;
+            //playerPoints += figure.GetComponent<PointsScript>().points;
         }
 
         foreach (GameObject figure in enemyFiguresLeft)
         {
-            enemyPoints += figure.GetComponent<PointsScript>().points;
+            //enemyPoints += figure.GetComponent<PointsScript>().points;
         }
 
         Debug.Log("GAME STATS");
         Debug.Log("Player points: " + playerPoints);
         Debug.Log("Enemy points: " + enemyPoints);
 
-        if (enemyPoints >= playerPoints) {
+        if (enemyPoints >= playerPoints)
+        {
             GameManager.Instance.UpdateGameState(GameState.Loose);
-        } else {
+        }
+        else
+        {
             GameManager.Instance.UpdateGameState(GameState.Victory);
         }
     }
@@ -76,7 +79,7 @@ public class GameController : MonoBehaviour
         SortedDictionary<string, GameObject> sortedTiles = new SortedDictionary<string, GameObject>();
         for (int i = 0; i < figuresOrder.Length; i++)
         {
-            sortedTiles.Add(figuresOrder[i].GetComponent<OrderScript>().OrderNum, figuresOrder[i]);
+            //sortedTiles.Add(figuresOrder[i].GetComponent<OrderScript>().OrderNum, figuresOrder[i]);
         }
 
         figuresOrder = sortedTiles.Values.ToArray();
