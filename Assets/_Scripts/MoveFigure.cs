@@ -17,4 +17,30 @@ public class MoveFigure : MonoBehaviour
 
     public int moves;
     public int doneMoves;
+
+
+    public void OnMouseEnter()
+    {
+        GameManager.Instance.showPrediction(transform.gameObject);
+    }
+
+
+    public void Green()
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            GameObject child = gameObject.transform.GetChild(i).gameObject;
+            child.GetComponent<Renderer>().material.color = Color.green;
+        }
+    }
+
+
+    public void UnGreen()
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            GameObject child = gameObject.transform.GetChild(i).gameObject;
+            child.GetComponent<Renderer>().material.color = Color.white;
+        }
+    }
 }

@@ -253,11 +253,29 @@ public class GameManager : MonoBehaviour
             selectedFigure = null;
         }
 
-        foreach (GameObject place in firstMoves)
+        foreach (GameObject fig in _enemyFigures)
+        {
+            fig.GetComponent<MoveFigure>().UnGreen();
+        }
+
+        foreach (GameObject fig in playerFigures)
+        {
+            fig.GetComponent<MoveFigure>().UnGreen();
+        }
+
+        foreach (Field place in fields)
         {
             place.GetComponent<Field>().UnGreen();
         }
 
+    }
+
+    public void HidePredictions()
+    {
+        foreach (Field place in fields)
+        {
+            place.GetComponent<Field>().predictionText.text = "";
+        }
     }
 
     private void SortArray()
@@ -290,6 +308,39 @@ public class GameManager : MonoBehaviour
         Array.Resize(ref figuresOrder, figuresOrder.Length - 1);
 
     }
+
+
+    public void showPrediction(GameObject figure)
+    {
+        UnselectAll();
+        HidePredictions();
+        figure.GetComponent<MoveFigure>().Green();
+        int posX = figure.GetComponent<MoveFigure>().posX;
+        int posY = figure.GetComponent<MoveFigure>().posY;
+        int moveOnX = figure.GetComponent<MoveFigure>().moveX;
+        int moveOnY = figure.GetComponent<MoveFigure>().moveY;
+        int moves = figure.GetComponent<MoveFigure>().moves;
+
+        if (posX >= 0 && posY >= 0)
+        {
+            Field curField = getField(posX, posY);
+            if (curField)
+                curField.GetComponent<Field>().Green();
+            for (int i = 1; i <= moves; i++)
+            {
+                Field newField = getField(posX + moveOnX, posY + moveOnY);
+                posX += moveOnX;
+                posY += moveOnY;
+                if (newField)
+                {
+                    newField.GetComponent<Field>().Green();
+                    newField.GetComponent<Field>().predictionText.text = i.ToString();
+                }
+            }
+
+        }
+    }
+
 
 }
 

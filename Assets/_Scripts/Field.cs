@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Field : MonoBehaviour
 {
     private Color defaultColor;
     public GameObject assignedFifure = null;
+    public TextMeshPro predictionText;
 
     public void Start()
     {
@@ -15,6 +17,11 @@ public class Field : MonoBehaviour
     public void Green()
     {
         GetComponent<Renderer>().material.color = Color.green;
+    }
+
+    public void Yellow()
+    {
+        GetComponent<Renderer>().material.color = Color.yellow;
     }
 
     public void UnGreen()
