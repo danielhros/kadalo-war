@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
 
     private void StartFight()
     {
+        UnselectAll();
+        HidePredictions();
         figuresOrder = playerFigures.Concat(_enemyFigures).ToArray();
         SortArray();
         UpdatePoints();
@@ -312,32 +314,35 @@ public class GameManager : MonoBehaviour
 
     public void showPrediction(GameObject figure)
     {
-        UnselectAll();
-        HidePredictions();
-        figure.GetComponent<MoveFigure>().Green();
-        int posX = figure.GetComponent<MoveFigure>().posX;
-        int posY = figure.GetComponent<MoveFigure>().posY;
-        int moveOnX = figure.GetComponent<MoveFigure>().moveX;
-        int moveOnY = figure.GetComponent<MoveFigure>().moveY;
-        int moves = figure.GetComponent<MoveFigure>().moves;
-
-        if (posX >= 0 && posY >= 0)
+        if (State == GameState.FiguresArrange)
         {
-            Field curField = getField(posX, posY);
-            if (curField)
-                curField.GetComponent<Field>().Green();
-            for (int i = 1; i <= moves; i++)
-            {
-                Field newField = getField(posX + moveOnX, posY + moveOnY);
-                posX += moveOnX;
-                posY += moveOnY;
-                if (newField)
-                {
-                    newField.GetComponent<Field>().Green();
-                    newField.GetComponent<Field>().predictionText.text = i.ToString();
-                }
-            }
+            UnselectAll();
+            HidePredictions();
+            figure.GetComponent<MoveFigure>().Green();
+            int posX = figure.GetComponent<MoveFigure>().posX;
+            int posY = figure.GetComponent<MoveFigure>().posY;
+            int moveOnX = figure.GetComponent<MoveFigure>().moveX;
+            int moveOnY = figure.GetComponent<MoveFigure>().moveY;
+            int moves = figure.GetComponent<MoveFigure>().moves;
 
+            if (posX >= 0 && posY >= 0)
+            {
+                Field curField = getField(posX, posY);
+                if (curField)
+                    curField.GetComponent<Field>().Green();
+                for (int i = 1; i <= moves; i++)
+                {
+                    Field newField = getField(posX + moveOnX, posY + moveOnY);
+                    posX += moveOnX;
+                    posY += moveOnY;
+                    if (newField)
+                    {
+                        newField.GetComponent<Field>().Green();
+                        newField.GetComponent<Field>().predictionText.text = i.ToString();
+                    }
+                }
+
+            }
         }
     }
 
