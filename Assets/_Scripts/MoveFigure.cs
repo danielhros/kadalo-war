@@ -21,7 +21,7 @@ public class MoveFigure : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        GameManager.Instance.showPrediction(transform.gameObject);
+        GameManager.Instance.ShowPrediction(transform.gameObject);
     }
 
 

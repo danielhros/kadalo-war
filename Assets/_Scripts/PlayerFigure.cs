@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerFigure : MonoBehaviour
 {
+    private Vector3 startPos;
+
+    public void Start()
+    {
+        startPos = transform.position;
+    }
 
     public void OnMouseDown()
     {
@@ -34,5 +40,10 @@ public class PlayerFigure : MonoBehaviour
             GameObject child = gameObject.transform.GetChild(i).gameObject;
             child.GetComponent<Renderer>().material.color = Color.white;
         }
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = startPos;
     }
 }

@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     private Field curField;
     private int playerPoints = 0;
     private int enemyPoints = 0;
+    private bool skipFight = false;
 
     public void Awake()
     {
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
 
     private Field getField(int y, int x)
     {
+        if (x >= fieldsWidth || y >= fields.Length / fieldsWidth || x < 0 || y < 0)
+        {
+            return null;
+        }
         return fields[(x * fieldsWidth) + y];
     }
 
@@ -144,7 +149,8 @@ public class GameManager : MonoBehaviour
                     }
                     figure.transform.position = newField.transform.position + new Vector3(0, 0.2f, 0);
                     figure.GetComponent<MoveFigure>().doneMoves++;
-                    yield return new WaitForSeconds(1);
+                    if (!skipFight)
+                        yield return new WaitForSeconds(1);
                 }
 
             }
@@ -312,7 +318,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void showPrediction(GameObject figure)
+    public void ShowPrediction(GameObject figure)
     {
         if (State == GameState.FiguresArrange)
         {
@@ -325,27 +331,46 @@ public class GameManager : MonoBehaviour
             int moveOnY = figure.GetComponent<MoveFigure>().moveY;
             int moves = figure.GetComponent<MoveFigure>().moves;
 
-            if (posX >= 0 && posY >= 0)
+            Field curField = getField(posX, posY);
+            if (curField)
+                curField.GetComponent<Field>().Green();
+            for (int i = 1; i <= moves; i++)
             {
-                Field curField = getField(posX, posY);
-                if (curField)
-                    curField.GetComponent<Field>().Green();
-                for (int i = 1; i <= moves; i++)
+                Field newField = getField(posX + moveOnX, posY + moveOnY);
+                posX += moveOnX;
+                posY += moveOnY;
+                if (newField)
                 {
-                    Field newField = getField(posX + moveOnX, posY + moveOnY);
-                    posX += moveOnX;
-                    posY += moveOnY;
-                    if (newField)
-                    {
-                        newField.GetComponent<Field>().Green();
-                        newField.GetComponent<Field>().predictionText.text = i.ToString();
-                    }
+                    newField.GetComponent<Field>().Green();
+                    newField.GetComponent<Field>().predictionText.text = i.ToString();
                 }
-
             }
+
+
         }
     }
 
+    public void ResetFigures()
+    {
+        foreach (GameObject fig in playerFigures)
+        {
+            UnselectAll();
+            HidePredictions();
+            fig.GetComponent<PlayerFigure>().ResetPosition();
+            curField = getField(fig.GetComponent<MoveFigure>().posX, fig.GetComponent<MoveFigure>().posY);
+            if (curField)
+                curField.GetComponent<Field>().assignedFifure = null;
+            fig.GetComponent<MoveFigure>().posX = -1;
+            fig.GetComponent<MoveFigure>().posY = -1;
+            fig.GetComponent<MoveNumber>().ResetMoveNumber();
+        }
+        playerOrderNum = playerGoFirst ? 1 : 2;
+    }
+
+    public void SkipFight()
+    {
+        skipFight = true;
+    }
 
 }
 

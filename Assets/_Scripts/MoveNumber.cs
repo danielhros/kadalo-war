@@ -13,4 +13,10 @@ public class MoveNumber : MonoBehaviour
         Text.SetText(moveNumber.ToString());
         orderNum = moveNumber;
     }
+
+    public void ResetMoveNumber()
+    {
+        Text.SetText("X".ToString());
+        orderNum = 0;
+    }
 }
