@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
 
                     if (posX == -1 || posY == -1)
                         continue;
+
                     curField = getField(posX, posY);
                     curField.GetComponent<Field>().assignedFifure = null;
 

@@ -4971,7 +4971,7 @@ MonoBehaviour:
   - {fileID: 1476029352}
   - {fileID: 1953600233}
   - {fileID: 517148266}
-  playerGoFirst: 0
+  playerGoFirst: 1
   enemyPointsText: {fileID: 1780654272}
   playerPointsText: {fileID: 1776987624}
   WinEnemyOverallPointsText: {fileID: 1486871147}
