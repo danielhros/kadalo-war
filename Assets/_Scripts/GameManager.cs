@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
         playerOrderNum = playerGoFirst ? 1 : 2;
         firstMoves = GameObject.FindGameObjectsWithTag("FirstMove");
         UpdatePoints();
-        SpawnEnemyFigures();
         UpdateGameState(GameState.FiguresArrange);
     }
 
@@ -69,6 +68,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.FiguresArrange:
+                SpawnEnemyFigures();
                 break;
             case GameState.Fight:
                 StartFight();
