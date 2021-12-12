@@ -36,6 +36,6 @@ public class Countdown : MonoBehaviour
         {
             GameManager.Instance.UpdateGameState(GameState.Fight);
         }
-        text.SetText((numberOfSeconds - seconds).ToString());
+        text.SetText((numberOfSeconds - seconds).ToString() + "s");
     }
 }
