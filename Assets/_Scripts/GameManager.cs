@@ -366,8 +366,45 @@ public class GameManager : MonoBehaviour
                     newField.GetComponent<Field>().predictionText.text = i.ToString();
                 }
             }
+        }
+    }
 
+    public void ShowPredictionField(Field field)
+    {
+        if (State == GameState.FiguresArrange && selectedFigure)
+        {
+            var fig = selectedFigure;
+            UnselectAll();
+            HidePredictions();
+            SelectFirstMoves(fig);
+            field.GetComponent<Field>().Green();
 
+            int moves = selectedFigure.GetComponent<MoveFigure>().moves;
+            int moveOnX = selectedFigure.GetComponent<MoveFigure>().moveX;
+            int moveOnY = selectedFigure.GetComponent<MoveFigure>().moveY;
+            int ind = 0;
+            foreach (Field place in fields)
+            {
+                if (field == place)
+                {
+                    break;
+                }
+                ind++;
+            }
+            int posX = ind % fieldsWidth;
+            int posY = ind / fieldsWidth;
+
+            for (int i = 1; i <= moves; i++)
+            {
+                Field newField = getField(posX + moveOnX, posY + moveOnY);
+                posX += moveOnX;
+                posY += moveOnY;
+                if (newField)
+                {
+                    newField.GetComponent<Field>().Green();
+                    newField.GetComponent<Field>().predictionText.text = i.ToString();
+                }
+            }
         }
     }
 

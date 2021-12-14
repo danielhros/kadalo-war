@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 5684318836181285481}
   - component: {fileID: 4778027221638964091}
   - component: {fileID: 6229280282880037814}
+  - component: {fileID: 2854054846789804126}
   m_Layer: 0
   m_Name: Field
   m_TagString: FirstMove
@@ -281,3 +282,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assignedFifure: {fileID: 0}
   predictionText: {fileID: 6600673084809705157}
+--- !u!114 &2854054846789804126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9151727153019964778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad7bc84d45364939b8f1b44f187f037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

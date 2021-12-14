@@ -34,4 +34,9 @@ public class Field : MonoBehaviour
         if (GetComponent<Renderer>().material.color == Color.green)
             GameManager.Instance.AssignSelectedFigure(this);
     }
+
+    public void OnMouseEnter()
+    {
+        GameManager.Instance.ShowPredictionField(this);
+    }
 }
