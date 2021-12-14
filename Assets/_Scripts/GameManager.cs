@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         HidePredictions();
         figuresOrder = playerFigures.Concat(_enemyFigures).ToArray();
         SortArray();
+        CheckSetFigures();
         UpdatePoints();
         StartCoroutine(Steps());
     }
@@ -144,14 +145,17 @@ public class GameManager : MonoBehaviour
                             var eliminatedFigure = newField.GetComponent<Field>().assignedFifure;
                             int numIndex = Array.IndexOf(figuresOrder, eliminatedFigure);
                             figuresOrder = figuresOrder.Where((val, idx) => idx != numIndex).ToArray();
-                            Destroy(eliminatedFigure);
+                            DestroyImmediate(eliminatedFigure);
                             UpdatePoints();
                         }
                     }
                     figure.transform.position = newField.transform.position + new Vector3(0, 0.2f, 0);
                     figure.GetComponent<MoveFigure>().doneMoves++;
+                    UpdatePoints();
                     if (!skipFight)
+                    {
                         yield return new WaitForSeconds(1);
+                    }
                 }
 
             }
@@ -232,6 +236,7 @@ public class GameManager : MonoBehaviour
 
                 selectedFigure.GetComponent<MoveFigure>().posX = x;
                 selectedFigure.GetComponent<MoveFigure>().posY = y;
+                selectedFigure.GetComponent<MoveFigure>().arranged = true;
 
                 curField = getField(x, y);
 
@@ -247,6 +252,7 @@ public class GameManager : MonoBehaviour
     {
         UnselectAll();
         selectedFigure = figure;
+        figure.GetComponent<PlayerFigure>().Green();
         foreach (GameObject place in firstMoves)
         {
             place.GetComponent<Field>().Green();
@@ -287,6 +293,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CheckSetFigures()
+    {
+        foreach (GameObject fig in playerFigures)
+        {
+            if (fig.GetComponent<MoveFigure>().arranged == false)
+            {
+                DestroyImmediate(fig);
+            }
+        }
+    }
+
     private void SortArray()
     {
 
@@ -315,12 +332,15 @@ public class GameManager : MonoBehaviour
             figuresOrder[a] = figuresOrder[a + 1];
         }
         Array.Resize(ref figuresOrder, figuresOrder.Length - 1);
-
     }
 
 
     public void ShowPrediction(GameObject figure)
     {
+        if (selectedFigure)
+        {
+            return;
+        }
         if (State == GameState.FiguresArrange)
         {
             UnselectAll();
@@ -363,6 +383,7 @@ public class GameManager : MonoBehaviour
                 curField.GetComponent<Field>().assignedFifure = null;
             fig.GetComponent<MoveFigure>().posX = -1;
             fig.GetComponent<MoveFigure>().posY = -1;
+            fig.GetComponent<MoveFigure>().arranged = false;
             fig.GetComponent<MoveNumber>().ResetMoveNumber();
         }
         playerOrderNum = playerGoFirst ? 1 : 2;

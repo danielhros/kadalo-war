@@ -18,6 +18,12 @@ public class MoveFigure : MonoBehaviour
     public int moves;
     public int doneMoves;
 
+    public bool arranged;
+
+    public void Awake()
+    {
+        arranged = false;
+    }
 
     public void OnMouseEnter()
     {
