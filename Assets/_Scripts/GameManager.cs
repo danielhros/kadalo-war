@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     private Field getField(int y, int x)
     {
-        if (x >= fieldsWidth || y >= fields.Length / fieldsWidth || x < 0 || y < 0)
+        if (y >= fieldsWidth || x >= fields.Length / fieldsWidth || x < 0 || y < 0)
         {
             return null;
         }
@@ -237,7 +237,6 @@ public class GameManager : MonoBehaviour
                 selectedFigure.GetComponent<MoveFigure>().posX = x;
                 selectedFigure.GetComponent<MoveFigure>().posY = y;
                 selectedFigure.GetComponent<MoveFigure>().arranged = true;
-
                 curField = getField(x, y);
 
                 selectedFigure.transform.position = field.transform.position + new Vector3(0, 0.2f, 0);
