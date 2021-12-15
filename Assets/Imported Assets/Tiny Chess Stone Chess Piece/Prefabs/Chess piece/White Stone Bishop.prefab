@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 2684441865629768430}
   - component: {fileID: 562223585254680261}
   - component: {fileID: 8715975853065233044}
+  - component: {fileID: 7636400054864389634}
   m_Layer: 0
   m_Name: White Stone Bishop
   m_TagString: Untagged
@@ -344,6 +345,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 84733839626964695}
   orderNum: 0
+--- !u!65 &7636400054864389634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353652469814562}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1379846575488800
 GameObject:
   m_ObjectHideFlags: 0
