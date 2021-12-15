@@ -274,7 +274,10 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject fig in playerFigures)
         {
-            fig.GetComponent<MoveFigure>().UnGreen();
+            if (fig != null)
+            {
+                fig.GetComponent<MoveFigure>().UnGreen();
+            }
         }
 
         foreach (Field place in fields)

@@ -31,8 +31,10 @@ public class Field : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (GetComponent<Renderer>().material.color == Color.green)
+        if (gameObject.tag == "FirstMove")
+        {
             GameManager.Instance.AssignSelectedFigure(this);
+        }
     }
 
     public void OnMouseEnter()

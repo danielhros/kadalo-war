@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c387a90ed170e4cc491190bed8e2eb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 0
+  points: 2
 --- !u!114 &562223585254680261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,11 +324,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202096cec84bf4872aca40cc7aba4b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveX: 0
-  moveY: 0
+  moveX: -1
+  moveY: -1
   posX: 0
   posY: 0
-  moves: 0
+  moves: 4
   doneMoves: 0
   arranged: 0
 --- !u!114 &8715975853065233044
