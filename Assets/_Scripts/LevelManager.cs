@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Singleton and dontDestroy on load pattern is used because this
+// class is used in every scene for changing scenes and other
+// parts in game rely on it.
 public class LevelManager : MonoBehaviour {
 
     public static LevelManager Instance;
-
-    // Start is called before the first frame update
+    
     void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -18,16 +20,10 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    // This method loads new scene..
+    // Possibly, here is perfect place to work with loading screen
+    // in the future.
     public void LoadScene(string sceneName) {
-
         SceneManager.LoadSceneAsync(sceneName);
-
-        // TODO: add loading screen
-        //scene.allowSceneActivation = false;
-        //_loaderCanvas.SetActive(true);
-        //do {
-        //} while (scene.progress < 0.9f);
-        //scene.allowSceneActivation = true;
-        //_loaderCanvas.SetActive(false);
     }
 }

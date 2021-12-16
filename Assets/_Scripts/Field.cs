@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-// here is handling chage of color, assigning figure on click and show predictions when arranging figures
+// This class is handling chage of field color, assigning figure on click and
+// showing predictions when arranging figures.
 public class Field : MonoBehaviour
 {
     private Color defaultColor;
@@ -18,11 +19,6 @@ public class Field : MonoBehaviour
     public void Green()
     {
         GetComponent<Renderer>().material.color = Color.green;
-    }
-
-    public void Yellow()
-    {
-        GetComponent<Renderer>().material.color = Color.yellow;
     }
 
     public void UnGreen()

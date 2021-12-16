@@ -3,31 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-// in this class is handled countime for arranging figues, when no time left game is started
+// This class handles timer for arranging figues, when there is no time left, timer emits method in
+// GameManager which changes game state to GameState.Fight.
 public class Countdown : MonoBehaviour
 {
     [SerializeField] private int numberOfSeconds;
     [SerializeField] private TextMeshProUGUI text;
-    private float timer = 0.0f;
-    private int seconds = 0;
-
-    private void Awake()
-    {
-        GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
-    }
-
-    private void GameManagerOnOnGameStateChanged(GameState state)
-    {
-        if (state == GameState.FiguresArrange)
-        {
-            seconds = 0;
-        }
-    }
+    private float timer;
+    private int seconds;
 
     void Update()
     {

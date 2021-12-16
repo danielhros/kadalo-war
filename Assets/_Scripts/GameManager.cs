@@ -39,18 +39,17 @@ public class GameManager : MonoBehaviour
     private int enemyPoints = 0;
     private bool skipFight = false;
 
-    // on awake set singleton instance
+    // on awake create singleton instance
     public void Awake()
     {
         Instance = this;
     }
 
-    // when I got x and y of field in array here is returning concrete field
+    // Get concrete filed by x and y coordinates.
     private Field getField(int x, int y)
     {
         if (x >= fieldsWidth || y >= fields.Length / fieldsWidth || x < 0 || y < 0)
         {
-            Debug.Log("Returning Null");
             return null;
         }
         return fields[(y * fieldsWidth) + x];
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.FiguresArrange);
     }
 
-    // handle game states
+    // Handler for game state update.
     public void UpdateGameState(GameState newState)
     {
         State = newState;
@@ -102,7 +101,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // main loop of game
+    // main loop of the game
     // going throught all figures and handling elimination of figures
     private IEnumerator Steps()
     {
@@ -131,8 +130,6 @@ public class GameManager : MonoBehaviour
                     int moveOnX = figure.GetComponent<MoveFigure>().moveX;
                     int moveOnY = figure.GetComponent<MoveFigure>().moveY;
 
-
-                    Debug.Log("new x" + posX + moveOnX + "new y" + posY + moveOnY);
                     newField = getField(posX + moveOnX, posY + moveOnY);
 
                     if (!newField)
@@ -140,8 +137,10 @@ public class GameManager : MonoBehaviour
                         figure.GetComponent<MoveFigure>().doneMoves = 1000;
                         continue;
                     }
+
                     figure.GetComponent<MoveFigure>().posX = posX + moveOnX;
                     figure.GetComponent<MoveFigure>().posY = posY + moveOnY;
+
                     if (newField.GetComponent<Field>())
                     {
                         if (newField.GetComponent<Field>().assignedFifure != null)
@@ -157,8 +156,10 @@ public class GameManager : MonoBehaviour
                         newField.GetComponent<Field>().assignedFifure = figure;
                         figure.transform.position = newField.transform.position + new Vector3(0, 0.2f, 0);
                     }
+
                     figure.GetComponent<MoveFigure>().doneMoves++;
                     UpdatePoints();
+
                     // chcek if skipfight, if false 1 sec wait for every move
                     if (!skipFight)
                     {
@@ -168,6 +169,7 @@ public class GameManager : MonoBehaviour
 
             }
         }
+
         UpdatePoints();
         // end check who wins the game
         if (playerPoints > enemyPoints)
@@ -266,7 +268,7 @@ public class GameManager : MonoBehaviour
     {
         UnselectAll();
         selectedFigure = figure;
-        figure.GetComponent<PlayerFigure>().Green();
+        figure.GetComponent<PlayerFigure>().ChangeColor(Color.green);
         foreach (GameObject place in firstMoves)
         {
             place.GetComponent<Field>().Green();
@@ -279,7 +281,7 @@ public class GameManager : MonoBehaviour
     {
         if (selectedFigure)
         {
-            selectedFigure.GetComponent<PlayerFigure>().UnGreen();
+            selectedFigure.GetComponent<PlayerFigure>().ChangeColor(Color.white);
             selectedFigure = null;
         }
 
@@ -434,10 +436,15 @@ public class GameManager : MonoBehaviour
         {
             UnselectAll();
             HidePredictions();
+
             fig.GetComponent<PlayerFigure>().ResetPosition();
             curField = getField(fig.GetComponent<MoveFigure>().posX, fig.GetComponent<MoveFigure>().posY);
+
             if (curField)
+            {
                 curField.GetComponent<Field>().assignedFifure = null;
+            }
+
             fig.GetComponent<MoveFigure>().posX = -1;
             fig.GetComponent<MoveFigure>().posY = -1;
             fig.GetComponent<MoveFigure>().arranged = false;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class which moves object by Vector3 filled from Unity editor
 public class MoveFor : MonoBehaviour
 {
 
@@ -26,6 +27,8 @@ public class MoveFor : MonoBehaviour
         GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
     }
 
+    // Class subsrcibe to event and wait for state to change.
+    // When state changes to Fight, it initiate moving to final position.
     private void GameManagerOnOnGameStateChanged(GameState state)
     {
         if (state == GameState.Fight)

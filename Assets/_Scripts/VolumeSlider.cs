@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This class is so called "adapter" used betweet SoundManager singleton instance nad sliders
+// for changing volume of music and effects independently. 
 public class VolumeSlider : MonoBehaviour
 {
     [SerializeField] private Slider _musicSlider, _effectsSlider;

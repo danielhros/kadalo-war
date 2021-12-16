@@ -15,32 +15,32 @@ public class PlayerFigure : MonoBehaviour
     {
         if (transform.gameObject.GetComponent<MoveNumber>().orderNum == 0)
         {
-            Green();
+            ChangeColor(Color.green);
             GameManager.Instance.SelectFirstMoves(transform.gameObject);
         }
     }
 
 
-    public void Green()
+    public void ChangeColor(Color color)
     {
         // change color of current figure
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             GameObject child = gameObject.transform.GetChild(i).gameObject;
-            child.GetComponent<Renderer>().material.color = Color.green;
+            child.GetComponent<Renderer>().material.color = color;
         }
     }
 
 
-    public void UnGreen()
-    {
-        // change color of current figure
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            GameObject child = gameObject.transform.GetChild(i).gameObject;
-            child.GetComponent<Renderer>().material.color = Color.white;
-        }
-    }
+    //public void UnGreen()
+    //{
+    //    // change color of current figure
+    //    for (int i = 0; i < gameObject.transform.childCount; i++)
+    //    {
+    //        GameObject child = gameObject.transform.GetChild(i).gameObject;
+    //        child.GetComponent<Renderer>().material.color = Color.white;
+    //    }
+    //}
 
     // set position on starting table
     public void ResetPosition()

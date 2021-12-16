@@ -6,7 +6,8 @@ public class PlaySound : MonoBehaviour
 {
     [SerializeField] private AudioClip _clip;
 
-    // Start is called before the first frame update
+    // Play sound once this method is called.
+    // It issues PlaySound method of singleton SoundManager instance
     public void PlaySoundOnce() {
         SoundManager.Instance.PlaySound(_clip);
     }

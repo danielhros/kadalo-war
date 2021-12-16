@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// class handles hud and menu in level
 public class MenuManager : MonoBehaviour
 {
 
@@ -21,6 +22,7 @@ public class MenuManager : MonoBehaviour
         GameManager.OnGameStateChanged -= GameManagerOnOnGameStateChanged;
     }
 
+    // class subsribes to event and when state is changed, class shows each canvas accordingly
     private void GameManagerOnOnGameStateChanged(GameState state) {
 
         bool isVictoryState = state == GameState.Victory;
@@ -35,6 +37,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    // When player press [esc], show "sure to exit" modal (only when state of the game is equal to FiguresArrange or Fight)
     private void Update() {
         GameState actualGameState = GameManager.Instance.State;
         if (Input.GetKeyDown(KeyCode.Escape) && (actualGameState == GameState.FiguresArrange || actualGameState == GameState.Fight)) {

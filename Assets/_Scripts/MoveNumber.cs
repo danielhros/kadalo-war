@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-// this class handles order numbers of figures
-// after set is is displayed on UI
-// in resetMoveNumber I remover order number and set text to X
+// This class handles order numbers of figures and their order number canvas.
 public class MoveNumber : MonoBehaviour
 {
     public TextMeshPro Text;
@@ -17,6 +15,7 @@ public class MoveNumber : MonoBehaviour
         orderNum = moveNumber;
     }
 
+    // method removes order number and sets text to value of X
     public void ResetMoveNumber()
     {
         Text.SetText("X".ToString());

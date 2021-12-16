@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+// This class is responsible for entire wound system in the game.
+// It uses singleton and dontDestroyOnLoad patter to be able to play background
+// music between scenes without interruption. This class also randomly choose background music
+// which will be used to play.
 public class SoundManager : MonoBehaviour {
 
     public static SoundManager Instance;
