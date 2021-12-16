@@ -2634,7 +2634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562223585254680261, guid: 9ddda65c1c1654147bbbdbdfcdb4881f, type: 3}
       propertyPath: moves
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2684441865629768430, guid: 9ddda65c1c1654147bbbdbdfcdb4881f, type: 3}
       propertyPath: points
@@ -5961,7 +5961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562223585254680261, guid: 9ddda65c1c1654147bbbdbdfcdb4881f, type: 3}
       propertyPath: moves
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2684441865629768430, guid: 9ddda65c1c1654147bbbdbdfcdb4881f, type: 3}
       propertyPath: points
@@ -8839,7 +8839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 373162360854550726, guid: c77f218d9ab1f424384acc3b86c56de1, type: 3}
       propertyPath: moves
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4075630384472910819, guid: c77f218d9ab1f424384acc3b86c56de1, type: 3}
       propertyPath: points
@@ -11300,7 +11300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 373162360854550726, guid: c77f218d9ab1f424384acc3b86c56de1, type: 3}
       propertyPath: moves
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4075630384472910819, guid: c77f218d9ab1f424384acc3b86c56de1, type: 3}
       propertyPath: points
