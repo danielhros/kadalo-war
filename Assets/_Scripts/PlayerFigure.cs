@@ -42,6 +42,7 @@ public class PlayerFigure : MonoBehaviour
         }
     }
 
+    // set position on starting table
     public void ResetPosition()
     {
         transform.position = startPos;

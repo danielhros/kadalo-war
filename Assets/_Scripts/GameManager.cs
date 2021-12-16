@@ -39,12 +39,13 @@ public class GameManager : MonoBehaviour
     private int enemyPoints = 0;
     private bool skipFight = false;
 
+    // on awake set singleton instance
     public void Awake()
     {
         Instance = this;
     }
 
-    // x = 1, y = 0
+    // when I got x and y of field in array here is returning concrete field
     private Field getField(int x, int y)
     {
         if (x >= fieldsWidth || y >= fields.Length / fieldsWidth || x < 0 || y < 0)
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         return fields[(y * fieldsWidth) + x];
     }
 
+
     private void Start()
     {
         playerOrderNum = playerGoFirst ? 1 : 2;
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.FiguresArrange);
     }
 
+    // handle game states
     public void UpdateGameState(GameState newState)
     {
         State = newState;
@@ -98,6 +101,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Steps());
     }
 
+
+    // main loop of game
+    // going throught all figures and handling elimination of figures
     private IEnumerator Steps()
     {
         while (figuresOrder.Length > 0)
@@ -139,18 +145,21 @@ public class GameManager : MonoBehaviour
                     if (newField.GetComponent<Field>())
                     {
                         if (newField.GetComponent<Field>().assignedFifure != null)
-                        { 
+                        {
+                            // on field already is another figure, so first eliminate that figure and update points
                             var eliminatedFigure = newField.GetComponent<Field>().assignedFifure;
                             int numIndex = Array.IndexOf(figuresOrder, eliminatedFigure);
                             figuresOrder = figuresOrder.Where((val, idx) => idx != numIndex).ToArray();
                             DestroyImmediate(eliminatedFigure);
-                            UpdatePoints(); 
+                            UpdatePoints();
                         }
+                        // move figure to new field
                         newField.GetComponent<Field>().assignedFifure = figure;
                         figure.transform.position = newField.transform.position + new Vector3(0, 0.2f, 0);
                     }
                     figure.GetComponent<MoveFigure>().doneMoves++;
                     UpdatePoints();
+                    // chcek if skipfight, if false 1 sec wait for every move
                     if (!skipFight)
                     {
                         yield return new WaitForSeconds(1);
@@ -160,6 +169,7 @@ public class GameManager : MonoBehaviour
             }
         }
         UpdatePoints();
+        // end check who wins the game
         if (playerPoints > enemyPoints)
         {
             UpdateGameState(GameState.Victory);
@@ -174,6 +184,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // update point of player and enemy according to figures left
     private void UpdatePoints()
     {
         playerPoints = 0;
@@ -198,7 +209,7 @@ public class GameManager : MonoBehaviour
         playerPointsText.SetText(playerPoints.ToString());
     }
 
-
+    // spawn enemy figures accoriding to set position 
     private void SpawnEnemyFigures()
     {
 
@@ -224,6 +235,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // if player has selected figure and click on field this method
+    // assign that figure on field, and move on that field
     public void AssignSelectedFigure(Field field)
     {
         if (selectedFigure)
@@ -248,6 +261,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // show green fields where player can assign figure
     public void SelectFirstMoves(GameObject figure)
     {
         UnselectAll();
@@ -260,6 +274,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // set all color to default and selectedfigure set to null
     public void UnselectAll()
     {
         if (selectedFigure)
@@ -337,7 +352,7 @@ public class GameManager : MonoBehaviour
         Array.Resize(ref figuresOrder, figuresOrder.Length - 1);
     }
 
-
+    // show prediction on hovered figure that is alredy on battleground
     public void ShowPrediction(GameObject figure)
     {
         if (selectedFigure)
@@ -372,6 +387,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // if selecteed figure and hovering over field show prediction
     public void ShowPredictionField(Field field)
     {
         if (State == GameState.FiguresArrange && selectedFigure)
@@ -411,6 +427,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // reset all players figures out of battleground
     public void ResetFigures()
     {
         foreach (GameObject fig in playerFigures)

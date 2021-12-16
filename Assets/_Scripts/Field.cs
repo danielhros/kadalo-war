@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// here is handling chage of color, assigning figure on click and show predictions when arranging figures
 public class Field : MonoBehaviour
 {
     private Color defaultColor;
@@ -29,6 +30,8 @@ public class Field : MonoBehaviour
         GetComponent<Renderer>().material.color = defaultColor;
     }
 
+    // if field is clicked and has tag first move (which means is available for assignening figure)
+    // call method of gamemanager and assign figure to this field
     public void OnMouseDown()
     {
         if (gameObject.tag == "FirstMove")
@@ -37,6 +40,7 @@ public class Field : MonoBehaviour
         }
     }
 
+    // possibly show predictions if game state is arrage figure and figure is selected
     public void OnMouseEnter()
     {
         GameManager.Instance.ShowPredictionField(this);

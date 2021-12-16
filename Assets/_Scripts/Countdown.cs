@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// in this class is handled countime for arranging figues, when no time left game is started
 public class Countdown : MonoBehaviour
 {
     [SerializeField] private int numberOfSeconds;
