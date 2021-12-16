@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
 
                     if (!newField)
                     {
+                        curField.GetComponent<Field>().assignedFifure = figure;
                         figure.GetComponent<MoveFigure>().doneMoves = 1000;
                         continue;
                     }
